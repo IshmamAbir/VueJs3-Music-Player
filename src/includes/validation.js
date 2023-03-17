@@ -37,7 +37,6 @@ export default {
     configure({
       generateMessage: (ctx) => {
         const messages = {
-          // (defined name set by developer):
           required: `The field ${ctx.field} is required`,
           min: `The field ${ctx.field} is too short`,
           max: `The field ${ctx.field} is too long`,
