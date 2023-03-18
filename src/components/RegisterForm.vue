@@ -39,6 +39,19 @@
       />
       <ErrorMessage name="age" class="text-red-600" />
     </div>
+    <!-- Role -->
+    <div class="mb-3">
+      <label class="inline-block mb-2">Role</label>
+      <vee-field
+        as="select"
+        name="role"
+        class="block w-full py-1.5 px-3 text-gray-800 border border-gray-300 transition duration-500 focus:outline-none focus:border-black rounded"
+      >
+        <option value="Listener">Listener</option>
+        <option value="Artist">Artist</option>
+      </vee-field>
+      <ErrorMessage name="role" class="text-red-600" />
+    </div>
     <!-- Password -->
     <div class="mb-3">
       <label class="inline-block mb-2">Password</label>
@@ -103,7 +116,8 @@
 </template>
 
 <script>
-import { auth, usersCollection } from '@/includes/firebase'
+import { mapActions } from 'pinia'
+import UseUserStore from '@/stores/user'
 
 export default {
   name: 'RegisterForm',
@@ -120,7 +134,8 @@ export default {
         password: 'required|min:3|max:40|excluded:password',
         confirm_password: 'confirmed:@password',
         country: 'required|country_excluded:Afganistan',
-        tos: 'tos'
+        tos: 'tos',
+        role: 'required'
       }
     }
   },
@@ -128,29 +143,17 @@ export default {
     tab: String
   },
   methods: {
+    ...mapActions(UseUserStore, {
+      createUser: 'register'
+    }),
     async register(values) {
       this.reg_show_alert = true
       this.reg_in_submission = true
       this.reg_alert_varient = 'bg-blue-500'
       this.reg_alert_msg = 'Please wait. creating account'
 
-      let userCred = null
       try {
-        userCred = await auth.createUserWithEmailAndPassword(values.email, values.password)
-      } catch (error) {
-        this.reg_in_submission = true
-        this.reg_alert_varient = 'bg-red-500'
-        this.reg_alert_msg = error.message
-        return
-      }
-
-      try {
-        await usersCollection.add({
-          name: values.name,
-          email: values.email,
-          age: values.age,
-          country: values.country
-        })
+        await this.createUser(values)
       } catch (error) {
         this.reg_in_submission = true
         this.reg_alert_varient = 'bg-red-500'
@@ -160,7 +163,7 @@ export default {
 
       this.reg_alert_varient = 'bg-green-500'
       this.reg_alert_msg = 'Success! account created'
-      console.log(userCred)
+      console.log(values)
     }
   }
 }
