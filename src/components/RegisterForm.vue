@@ -163,6 +163,7 @@ export default {
 
       this.reg_alert_varient = 'bg-green-500'
       this.reg_alert_msg = 'Success! account created'
+      window.location.reload()
       console.log(values)
     }
   }

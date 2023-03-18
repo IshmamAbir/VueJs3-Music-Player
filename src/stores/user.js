@@ -17,10 +17,16 @@ export default defineStore('user', {
         country: values.country,
         role: values.role
       })
-      userCred.user.updaProfile({
+      userCred.user.updateProfile({
         displayName: values.name
       })
 
+      this.userLoggedIn = true
+    },
+    async authenticate(values) {
+      let abc = await auth.signInWithEmailAndPassword(values.email, values.password)
+
+      console.log('from userstore' + abc)
       this.userLoggedIn = true
     }
   }
