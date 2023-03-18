@@ -103,6 +103,8 @@
 </template>
 
 <script>
+import { auth, usersCollection } from '@/includes/firebase'
+
 export default {
   name: 'RegisterForm',
   data() {
@@ -126,15 +128,39 @@ export default {
     tab: String
   },
   methods: {
-    register(values) {
+    async register(values) {
       this.reg_show_alert = true
       this.reg_in_submission = true
       this.reg_alert_varient = 'bg-blue-500'
       this.reg_alert_msg = 'Please wait. creating account'
 
+      let userCred = null
+      try {
+        userCred = await auth.createUserWithEmailAndPassword(values.email, values.password)
+      } catch (error) {
+        this.reg_in_submission = true
+        this.reg_alert_varient = 'bg-red-500'
+        this.reg_alert_msg = error.message
+        return
+      }
+
+      try {
+        await usersCollection.add({
+          name: values.name,
+          email: values.email,
+          age: values.age,
+          country: values.country
+        })
+      } catch (error) {
+        this.reg_in_submission = true
+        this.reg_alert_varient = 'bg-red-500'
+        this.reg_alert_msg = error.message
+        return
+      }
+
       this.reg_alert_varient = 'bg-green-500'
       this.reg_alert_msg = 'Success! account created'
-      console.log(values)
+      console.log(userCred)
     }
   }
 }
