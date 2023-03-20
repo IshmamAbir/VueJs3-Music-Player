@@ -28,6 +28,10 @@ export default defineStore('user', {
 
       console.log('from userstore' + abc)
       this.userLoggedIn = true
+    },
+    async logout() {
+      await auth.signOut()
+      this.userLoggedIn = false
     }
   }
 })

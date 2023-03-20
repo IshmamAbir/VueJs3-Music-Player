@@ -38,6 +38,7 @@ export default {
     ...mapWritableState(UseUserStore, ['userLoggedIn'])
   },
   created() {
+    console.log('From app.vue ' + auth.currentUser)
     if (auth.currentUser) {
       this.userLoggedIn = true
     }
