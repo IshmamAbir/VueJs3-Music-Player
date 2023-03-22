@@ -24,7 +24,7 @@
           <template v-else>
             <li>
               <router-link class="px-2 text-white" to="/manage">Manage</router-link>
-              <a class="px-2 text-white" @click.prevent="userStore.logout" href="#">Logout</a>
+              <a class="px-2 text-white" @click.prevent="signOut" href="#">Logout</a>
             </li>
           </template>
         </ul>
@@ -50,6 +50,13 @@ export default {
     ...mapActions(useUserStore, ['logout']),
     toggleAuthModal() {
       ;(this.modalStore.isOpen = !this.modalStore.isOpen), console.log(this.modalStore.isOpen)
+    },
+    signOut() {
+      this.userStore.logout()
+      // console.log(this.$route)
+      if (this.$route.name === 'manage') {
+        this.$router.push({ name: 'home' })
+      }
     }
   }
 }
