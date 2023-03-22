@@ -14,8 +14,6 @@
 <script>
 import AppHeader from './components/AppHeader.vue'
 import AppAuth from './components/AppAuth.vue'
-// import AppDescription from './components/AppDescription.vue'
-// import AppMainContent from './components/AppMainContent.vue'
 import AppPlayer from './components/AppPlayer.vue'
 import { mapWritableState } from 'pinia'
 import UseUserStore from './stores/user'
@@ -26,8 +24,6 @@ export default {
   components: {
     AppHeader,
     AppAuth,
-    // AppDescription,
-    // AppMainContent,
     AppPlayer
   },
   computed: {
