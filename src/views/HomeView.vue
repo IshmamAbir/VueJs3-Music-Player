@@ -1,3 +1,24 @@
-<script setup></script>
+<script>
+// import AppAuth from './components/AppAuth.vue'
+import AppDescription from '@/components/AppDescription.vue'
+import AppMainContent from '@/components/AppMainContent.vue'
+// import AppPlayer from './components/AppPlayer.vue'
 
-<template></template>
+export default {
+  name: 'HomeView',
+  components: {
+    // AppAuth,
+    AppDescription,
+    AppMainContent
+    // AppPlayer
+  }
+}
+</script>
+
+<template>
+  <!-- Introduction -->
+  <app-description />
+
+  <!-- Main Content -->
+  <app-main-content />
+</template>

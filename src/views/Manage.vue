@@ -135,3 +135,16 @@
     </div>
   </section>
 </template>
+
+<script>
+export default {
+  // eslint-disable-next-line vue/multi-word-component-names
+  name: 'manage',
+
+  //component route guard
+  beforeRouteEnter(to, from, next) {
+    console.log('beforeRouteEnter Guard' + to, from)
+    next()
+  }
+}
+</script>
