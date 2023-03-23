@@ -11,9 +11,15 @@
             <span class="card-title">My Songs</span>
             <i class="fa fa-compact-disc float-right text-green-400 text-2xl"></i>
           </div>
-          <div class="p-6" v-for="song in songs" :key="song.docID">
+          <div class="p-6">
             <!-- Composition Items -->
-            <composition-item :song="song" />
+            <composition-item
+              v-for="(song, i) in songs"
+              :key="song.docID"
+              :song="song"
+              :updateSong="updateSong"
+              :index="i"
+            />
           </div>
         </div>
       </div>
@@ -62,6 +68,12 @@ export default {
       }
       this.songs.push(song)
     })
+  },
+  methods: {
+    updateSong(i, values) {
+      this.songs[i].modified_name = values.modified_name
+      this.songs[i].genre = values.genre
+    }
   }
 }
 </script>
