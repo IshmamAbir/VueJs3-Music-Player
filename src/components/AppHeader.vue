@@ -28,6 +28,13 @@
             </li>
           </template>
         </ul>
+        <ul class="ml-auto">
+          <li>
+            <a href="" class="px-2 text-white" @click.prevent="changeLocale">
+              {{ currentLocale }}
+            </a>
+          </li>
+        </ul>
       </div>
     </nav>
   </header>
@@ -44,7 +51,10 @@ export default {
     return {}
   },
   computed: {
-    ...mapStores(useModalStore, useUserStore)
+    ...mapStores(useModalStore, useUserStore),
+    currentLocale() {
+      return this.$i18n.locale === 'ja' ? 'Japaneese' : 'English'
+    }
   },
   methods: {
     ...mapActions(useUserStore, ['logout']),
@@ -57,6 +67,9 @@ export default {
       if (this.$route.meta.requiresAuth) {
         this.$router.push({ name: 'home' })
       }
+    },
+    changeLocale() {
+      this.$i18n.locale = this.$i18n.locale === 'ja' ? 'en' : 'ja'
     }
   }
 }
