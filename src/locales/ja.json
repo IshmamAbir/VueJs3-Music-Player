@@ -4,5 +4,9 @@
   },
   "song": {
     "comment_count": "コメントはありません | 1 コメント | {count} コメント"
+  },
+  "register": {
+    "accept": "I accept music's {0}",
+    "tos": "利用規約"
   }
 }
