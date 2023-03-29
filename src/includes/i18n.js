@@ -4,7 +4,7 @@ import ja from '@/locales/ja.json'
 
 export default createI18n({
   locale: 'en',
-  fallbackLocale: 'ja',
+  fallbackLocale: 'en',
   messages: {
     en,
     ja
