@@ -16,9 +16,11 @@ export default {
 </script>
 
 <template>
-  <!-- Introduction -->
-  <app-description />
+  <main>
+    <!-- Introduction -->
+    <app-description />
 
-  <!-- Main Content -->
-  <app-main-content />
+    <!-- Main Content -->
+    <app-main-content />
+  </main>
 </template>
